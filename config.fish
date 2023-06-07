@@ -3,7 +3,7 @@ fish_add_path fish_add_path ~/.nix-profile/bin
 bass source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
  
  
-# source ~/.asdf/asdf.fish
+source ~/.asdf/asdf.fish
 alias hm="home-manager "
 alias hms="home-manager switch"
 alias hme="home-manager edit"

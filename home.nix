@@ -9,6 +9,8 @@ let
       ref = ref;
     };
   };
+  username = "hk";
+  homeDirectory = "/home/hk";
   neovimConfig = import ./neovim.nix;
   fishConfig = import ./fish.nix;
   asdfConfig = import ./asdf.nix;
@@ -16,8 +18,8 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "hk";
-  home.homeDirectory = "/home/hk";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -34,6 +36,8 @@ in
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     pkgs.hello
+    pkgs.fzf
+    pkgs.ripgrep
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -78,7 +82,7 @@ in
     EDITOR = "nvim";
   };
   
-  programs.neovim = neovimConfig pkgs.vimPlugins;
+  programs.neovim = neovimConfig.plugins homeDirectory pkgs.vimPlugins;
   programs.fish = fishConfig pkgs.fetchFromGitHub;
 
   # Let Home Manager install and manage itself.
