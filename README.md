@@ -23,13 +23,13 @@ I will turn this into a script at some point, no reason for it to be copy pasta.
 
 ## What does it install?
  - Neovim with 
-  - Node and lua LSPs
-  - Completion
-  - Session Management
-  - Nightfox theme
-  - Treesitter and nvim-tree
-  - Telescope, fzf
-  - Remaps, tweaks, and other goodies
+   - Node and lua LSPs
+   - Completion
+   - Session Management
+   - Nightfox theme
+   - Treesitter and nvim-tree
+   - Telescope, fzf
+   - Remaps, tweaks, and other goodies
  - Some command line utils like yq, ripgrep
  - asdf for managing and languages
  - node installed via asdf
