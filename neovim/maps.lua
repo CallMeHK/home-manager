@@ -32,7 +32,10 @@ map("n", "<C-n>", ":NvimTreeFindFile<cr>", options)
 map("n", "<leader><C-n>", ":NvimTreeOpen<cr>", options)
 
 -- Copy paste (doesnt work in WSL)
-map("v", "<C-c>", '"+yi<ESC>', options)
+-- this one is for xorg, need xclip installed
+-- map("v", "<C-c>", '"+yi<ESC>', options)
+-- this one is for wayland, need wl-clipboard installed
+vim.cmd('xnoremap <C-c> y:call system("wl-copy", @")<cr>')
 
 
 if not ok_builtin then

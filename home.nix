@@ -35,11 +35,11 @@ in
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    pkgs.hello
     pkgs.fzf
     pkgs.ripgrep
     pkgs.yq
     pkgs.rnix-lsp
+    pkgs.neofetch
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -89,6 +89,7 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  home.activation.asdf = lib.hm.dag.entryAfter ["writeBoundary"] (builtins.readFile ./asdf.sh);
-  home.activation.set_default_shell = lib.hm.dag.entryAfter ["writeBoundary"] (builtins.readFile ./set_default_shell.sh);
+  home.activation.asdf = lib.hm.dag.entryAfter ["writeBoundary"] (builtins.readFile ./shell_scripts/asdf.sh);
+  home.activation.set_default_shell = lib.hm.dag.entryAfter ["writeBoundary"] (builtins.readFile ./shell_scripts/set_default_shell.sh);
+  # home.activation.postbird = lib.hm.dag.entryAfter ["writeBoundary"] (builtins.readFile ./shell_scripts/postbird.sh);
 }
