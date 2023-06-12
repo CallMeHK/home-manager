@@ -13,7 +13,7 @@ let
   homeDirectory = "/home/hk";
   neovimConfig = import ./neovim.nix;
   fishConfig = import ./fish.nix;
-  asdfConfig = import ./asdf.nix;
+  # asdfConfig = import ./asdf.nix;
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -38,6 +38,8 @@ in
     pkgs.hello
     pkgs.fzf
     pkgs.ripgrep
+    pkgs.yq
+    pkgs.rnix-lsp
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -82,10 +84,11 @@ in
     EDITOR = "nvim";
   };
   
-  programs.neovim = neovimConfig.plugins homeDirectory pkgs.vimPlugins;
+  programs.neovim = neovimConfig.plugins homeDirectory pkgs.vimPlugins fromGitHub;
   programs.fish = fishConfig pkgs.fetchFromGitHub;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  home.activation.asdf = lib.hm.dag.entryAfter ["writeBoundary"] asdfConfig;
+  home.activation.asdf = lib.hm.dag.entryAfter ["writeBoundary"] (builtins.readFile ./asdf.sh);
+  home.activation.set_default_shell = lib.hm.dag.entryAfter ["writeBoundary"] (builtins.readFile ./set_default_shell.sh);
 }

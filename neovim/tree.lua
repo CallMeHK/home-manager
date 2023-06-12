@@ -6,7 +6,8 @@ if not ok_tree then
 	vim.notify(tree, vim.log.levels.ERROR)
 else
 	vim.g.nvim_tree_disable_default_keybindings = 1
-
+-- gotta do this to get rid of deprecation warning, whole api is changing ugh
+-- https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach
 local bindings = { -- BEGIN_DEFAULT_MAPPINGS
     { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
     { key = "<C-e>",                          action = "edit_in_place" },
@@ -93,6 +94,17 @@ tree.setup({
 local git = require("nvim-tree.git")
 
 -- git.ignore = false
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+  pattern = 'NvimTree*',
+  callback = function()
+    local api = require('nvim-tree.api')
+    local view = require('nvim-tree.view')
+
+    if not view.is_visible() then
+      api.tree.open()
+    end
+  end,
+})
 end
 
 local ok_icons, icons = pcall(require, 'nvim-web-devicons')

@@ -1,9 +1,14 @@
 rec {
-plugins = homePath: vimPlugins: {
+plugins = homePath: vimPlugins: fromGitHub: {
   enable = true;
   defaultEditor = true;
   extraLuaConfig = ''
   	dofile("${homePath}/.config/home-manager/neovim/maps.lua")
+  	dofile("${homePath}/.config/home-manager/neovim/setup.lua")
+
+    -- fromGitHub configs
+  	dofile("${homePath}/.config/home-manager/neovim/transparent.lua")
+
   '';
   plugins = with vimPlugins;  [
      nvim-web-devicons
@@ -19,25 +24,23 @@ plugins = homePath: vimPlugins: {
      plenary-nvim
      vim-sneak
      (importPlugin homePath nightfox-nvim "nightfox.lua")
-
-     
+     lightline-vim
+     (importPlugin homePath hop-nvim "hop.lua")
+     (importPlugin homePath nvim-cmp "cmp.lua")
+     cmp-buffer
+     cmp-path
+     cmp-cmdline 
+     cmp-nvim-lsp
+     cmp-nvim-lua
+     luasnip
+     cmp_luasnip
+     (importPlugin homePath nvim-lspconfig "lsp.lua")
+     mason-nvim
+     mason-lspconfig-nvim
   # (fromGitHub "HEAD" "navarasu/onedark.nvim")
-  # (fromGitHub "HEAD" "itchyny/lightline.vim")
-  # (fromGitHub "HEAD" "xiyaowong/nvim-transparent")
-  # (fromGitHub "HEAD" "phaazon/hop.nvim")
-  # (fromGitHub "HEAD" "hrsh7th/nvim-cmp") 
-  # (fromGitHub "HEAD" "hrsh7th/cmp-buffer") 
-  # (fromGitHub "HEAD" "hrsh7th/cmp-path") 
-  # (fromGitHub "HEAD" "hrsh7th/cmp-cmdline") 
-  # (fromGitHub "HEAD" "hrsh7th/cmp-nvim-lsp")
-  # (fromGitHub "HEAD" "hrsh7th/cmp-nvim-lua")
-  # (fromGitHub "HEAD" "L3MON4D3/LuaSnip") 
-  # (fromGitHub "HEAD" "saadparwaiz1/cmp_luasnip") 
-  # (fromGitHub "HEAD" "neovim/nvim-lspconfig") 
-  # (fromGitHub "HEAD" "williamboman/mason.nvim") 
-  # (fromGitHub "HEAD" "williamboman/mason-lspconfig.nvim") 
-  # (fromGitHub "HEAD" "jose-elias-alvarez/null-ls.nvim") 
-  # (fromGitHub "HEAD" "rmagatti/auto-session")
+     (fromGitHub "HEAD" "xiyaowong/nvim-transparent")
+     (importPlugin homePath auto-session "auto-session.lua")
+     
    ];
   };
   importPlugin = homePath: plugin: config: {
