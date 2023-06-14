@@ -40,6 +40,7 @@ in
     pkgs.yq
     pkgs.rnix-lsp
     pkgs.neofetch
+    pkgs.gh
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
